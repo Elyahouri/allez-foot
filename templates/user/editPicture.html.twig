@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modification Photo{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3"></div>
+            <div class="col-lg-6">
+                <h1 class="text-center">Modification de photo de profil</h1>
+                {% for error in errors %}
+                    <button type="button" class="btn btn-warning">{{ error }}</button>
+                {% endfor %}
+                <span>
+                {{ include('user/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+                    <a href="{{ path('app_user_show',{'id':user.id}) }}" class=""><button type="button" class="btn btn-info">Retour</button></a>
+                <a href="{{ path('app_user_delete_picture', {'id': user.id}) }}"><button type="button" class="btn btn-info">Je ne veux pas de photo de profil</button></a>
+                </span>
+            </div>
+            <div class="col-lg-3"></div>
+        </div>
+    </div>
+
+{% endblock %}

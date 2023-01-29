@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modification Profil{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3"></div>
+            <div class="col-lg-6">
+                {% if errors %}
+                    {% for error in errors%}
+                        <button type="button" class="btn btn-warning">{{ error }}</button><br>
+                    {% endfor %}
+                {% endif %}
+                <h1 class="text-center">Modification du profil</h1>
+
+                {{ include('user/_form.html.twig', {'button_label': 'Update'}) }}
+                <a href="{{ path('app_user_edit_password', {'id':user.id}) }}" class="">Modifier le mot de passe</a>
+                {{ include('user/_delete_form.html.twig', {'button_label': 'Supprimer le compte'}) }}
+            </div>
+            <div class="col-lg-3"></div>
+        </div>
+    </div>
+
+{% endblock %}

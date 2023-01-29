@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}User index{% endblock %}
+
+{% block body %}
+    <h1>User index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Pseudo</th>
+                <th>Nickname</th>
+                <th>PrizeList</th>
+                <th>Photo de profil</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.Pseudo }}</td>
+                <td>{{ user.nickname }}</td>
+                <td aria-valuemax="40">{{ user.prizeList }}</td>
+                <td>
+                {% if user.profilePicture %}
+                    <img src="{{ asset('upload/'~user.profilePicture) }}" height="100">
+                {% else%}
+                    <img src="https://i.pinimg.com/280x280_RS/35/a1/e6/35a1e6d69cf6924b6076d864a5d39e95.jpg" alt="Pas de photo" height="100">
+                {% endif %}
+                </td>
+                <td>
+                    <a href="{{ path('app_user_show', {'id': user.id}) }}">show</a>
+                    <a href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_user_new') }}">Create new</a>
+{% endblock %}

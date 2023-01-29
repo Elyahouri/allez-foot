@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}User index{% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-3"></div>
+            <div class="col-lg-6">
+                <span><p>Nous avons {{ users|length }} experts à notre disposition.
+                {% if is_granted('ROLE_ADMIN') %}
+                    <a href="{{ path('app_reporter_new') }}"><button type="button" class="btn btn-info">Ajouter un journaliste +</button></a>
+                {% endif %}
+                </p></span>
+
+                <table class="table">
+                    <th colspan="3" class="bg-info"><h1 class="text-center text-light">Nos Experts</h1></th>
+                {% for user in users %}
+                        <tr class="table-info">
+                            <td rowspan="2">
+                                {% if user.profilePicture %}
+                                    <img src="{{ asset('upload/'~user.profilePicture) }}" height="100">
+                                {% else%}
+                                    <img src="https://i.pinimg.com/280x280_RS/35/a1/e6/35a1e6d69cf6924b6076d864a5d39e95.jpg" alt="Pas de photo" height="100">
+                                {% endif %}
+                            </td>
+                            <td><button type="button" class="btn btn-info">{{ user.pseudo }}</button></td>
+                            <td><a href="{{ path('app_user_show', {'id': user.id}) }}"><button type="button" class="btn btn-danger">Voir le profil</button></a></td>
+                        </tr>
+                        <tr class="table-info">
+                            <td colspan="2"><button type="button" class="btn btn-secondary">Nombre d'articles: {{ user.nbArticles }}</button></td>
+                        </tr>
+                {% endfor %}
+                </table>
+            </div>
+            <div class="col-lg-3"></div>
+        </div>
+    </div>
+
+
+
+{% endblock %}
+

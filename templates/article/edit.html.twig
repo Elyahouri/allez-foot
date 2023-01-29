@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Article{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4"></div>
+            <div class="col-lg-4">
+                <h1>Edit Article</h1>
+
+                {{ include('article/_form.html.twig', {'button_label': 'Modifier'}) }}
+
+                <a href="{{ path('app_article_edit_picture', {'id': article.id}) }}"><button type="button" class="btn btn-info"><p class="text-light">Modifier photo de l'article</p></button></a>
+                <a href="{{ path('app_article_index') }}">Retour à la liste d'articles</a>
+
+                {{ include('article/_delete_form.html.twig', {'button_label': 'Supprimer'}) }}</div>
+            <div class="col-lg-4"></div>
+        </div>
+    </div>
+
+{% endblock %}

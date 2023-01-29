@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Article index{% endblock %}
+
+{% block body %}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-3"></div>
+        <div class="col-lg-6">
+                <span><p>Nous avons {{ articles|length }} articles à votre disposition.
+                {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_REPORTER') %}
+                    <a href="{{ path('app_article_new') }}"><button type="button" class="btn btn-info">Ajouter un article +</button></a>
+                {% endif %}
+                </p></span>
+
+            <table class="table">
+                <th colspan="3" class="bg-info"><h1 class="text-center text-light">Les articles</h1></th>
+                {% for article in articles %}
+                    <tr class="table-info">
+                        <td rowspan="2">
+                            {% if article.image %}
+                                <img src="{{ asset('upload/'~article.image) }}" height="100">
+                            {% else%}
+                                <p></p>
+                            {% endif %}
+                        </td>
+                        <td><button type="button" class="btn btn-info"><p class="text-light">{{ article.title }}</p></button></td>
+                        <td><a href="{{ path('app_article_show', {'id': article.id}) }}"><button type="button" class="btn btn-danger">Lire l'article</button></a></td>
+                    </tr>
+                    <tr class="table-info">
+                        {% if article.user %}
+                            <td><a href="{{ path('app_user_show', {'id': article.user.id}) }}"><button type="button" class="btn btn-secondary">Auteur: {{ article.user.pseudo }}</button></a></td>
+                        {% else %}
+                            <td><button type="button" class="btn btn-secondary">Pas d'auteur renseigné</button></td>
+                        {% endif%}
+                        <td><button type="button" class="btn btn-secondary"><small>Date de publication:<br>{{ article.createdAt ? article.createdAt|date('d-m-Y') : '' }}</small></button></td>
+
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <div class="col-lg-3"></div>
+    </div>
+</div>
+{% endblock %}

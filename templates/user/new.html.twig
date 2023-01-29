@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New User{% endblock %}
+
+{% block body %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-4 col-sm-2"></div>
+        <div class="col-lg-4 col-sm-8">
+            <h1 class="text-center">Création de compte</h1>
+            {% if errors %}
+                {% for error in errors%}
+                    <button type="button" class="btn btn-warning">{{ error }}</button><br>
+                {% endfor %}
+            {% endif %}
+            {{ include('user/_form.html.twig') }}
+
+            <a href="{{ path('app_user_index') }}">back to list</a>
+        </div>
+        <div class="col-lg-4 col-sm-2"></div>
+    </div>
+</div>
+
+{% endblock %}

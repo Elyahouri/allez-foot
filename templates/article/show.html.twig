@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ article.title }}{% endblock %}
+
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-2"></div>
+            <div class="col-lg-8">
+                <h1 class="text-center">{{ article.title }}</h1>
+
+                {% if article.user %}
+                    <small>Ecrit par:<a href="{{ path('app_user_show', {'id': article.user.id}) }}">{{ article.user.pseudo }}</a>
+                {% else %}
+                     <small> Pas d'auteur renseigné
+                {% endif%}
+                , date de publication: {{ article.createdAt ? article.createdAt|date('d-m-Y') : '' }}</small><br><br>
+
+                {% if article.image %}
+                <img src="{{ asset('upload/'~article.image) }}" height="250">
+                {% endif %}
+                <p>{{ article.content }}</p>
+
+
+
+
+                <a href="{{ path('app_article_index') }}">Retour à la liste d'article</a>
+                {% if app.user %}
+                    {% if article.user and app.user.id == article.user.id  or is_granted('ROLE_ADMIN')%}
+                        <a href="{{ path('app_article_edit', {'id': article.id}) }}">Modifier l'article</a>
+
+                        {{ include('article/_delete_form.html.twig') }}
+                    {% endif %}
+                {% endif %}
+
+            </div>
+            <div class="col-lg-2"></div>
+        </div>
+    </div>
+
+{% endblock %}

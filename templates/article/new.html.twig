@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Article{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4"></div>
+            <div class="col-lg-4">
+                <h1>Create new Article</h1>
+                {% if error %}
+                    <button type="button" class="btn btn-warning">{{ error }}</button>
+                {% endif %}
+
+                {{ include('article/_form.html.twig') }}
+
+                <a href="{{ path('app_article_index') }}">back to list</a>
+            </div>
+            <div class="col-lg-4"></div>
+        </div>
+    </div>
+
+{% endblock %}
