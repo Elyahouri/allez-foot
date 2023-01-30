@@ -18,7 +18,7 @@
                 , date de publication: {{ article.createdAt ? article.createdAt|date('d-m-Y') : '' }}</small><br><br>
 
                 {% if article.image %}
-                <img src="{{ asset('upload/'~article.image) }}" height="250">
+                <img src="{{ asset('upload/'~article.image) }}" height="250" class="image-article">
                 {% endif %}
                 <p>{{ article.content }}</p>
 

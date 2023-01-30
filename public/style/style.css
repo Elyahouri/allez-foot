@@ -1,0 +1,16 @@
+.image-article{
+    float: left;
+    margin-right: 15px;
+    margin-bottom: 10px;
+
+}
+p{
+    text-align: justify;
+}
+
+@media (max-width: 800px) {
+    .image-article {
+        float: none;
+        width: max-content;
+    }
+}
