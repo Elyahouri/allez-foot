@@ -2,13 +2,28 @@
 {% block body %}
 <div class="container">
     <div class="row">
-        <div class="col-lg-3"></div>
+        <div class="col-lg-1">
+        </div>
+        <div class="col-lg-2 d-none d-lg-block">
+            {% for i in 1..40 %}
+                <h1><span class="badge bg-dark">Crève !</span></h1>
+                <h1><span class="badge bg-danger">Meurs !</span></h1>
+                <h1><span class="badge bg-warning">Décède !</span></h1>
+            {% endfor %}
+        </div>
         <div class="col-lg-6">
             {% for i in 1..1000  %}
                 <p>Ces allemands qu'ils CRÈVENT ! Ces SALES CHIENS d'allemands ! On n'en peut plus de ces allemands !</p>
             {% endfor %}
         </div>
-        <div class="col-lg-3"></div>
+        <div class="col-lg-2 d-none d-lg-block">
+            {% for i in 1..40 %}
+                <h1><span class="badge bg-dark">Crève !</span></h1>
+                <h1><span class="badge bg-danger">Meurs !</span></h1>
+                <h1><span class="badge bg-warning">Décède !</span></h1>
+            {% endfor %}
+        </div>
+        <div class="col-lg-1"></div>
     </div>
 </div>
 {% endblock %}

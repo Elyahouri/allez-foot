@@ -216,15 +216,18 @@ class UserController extends AbstractController
         }
         else{
             if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
-                foreach ($user->getArticles() as $article){
-                    $article->setUser(null);
-                    $articleRepository->save($article,true);
+                if ($user->getArticles()){
+                    foreach ($user->getArticles() as $article){
+                        $article->setUser(null);
+                        $articleRepository->save($article,true);
+                    }
+
                 }
                 if($user->getProfilePicture()){
                     unlink(($this->getParameter('image_directory').'/'.$user->getProfilePicture()));
                 }
 
-                if($user = $this->getUser()){
+                if($user->getUserIdentifier() == $this->getUser()->getUserIdentifier()){
                     $session = new Session();
                     $session->invalidate();
                     $userRepository->remove($user, true);
